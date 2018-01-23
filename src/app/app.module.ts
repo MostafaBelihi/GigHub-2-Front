@@ -7,20 +7,23 @@ import { routing } from "./app.routing";
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
+import { UsersDataSource } from './_services/users.datasource'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsersComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-	FormsModule,
-	routing,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		UsersComponent,
+		HomeComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		routing,
+		HttpModule
+	],
+	providers: [
+		UsersDataSource
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
