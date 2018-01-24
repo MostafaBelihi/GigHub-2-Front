@@ -5,7 +5,7 @@
 	<tr *ngIf="isEmpty"><td colspan="3" class="text-center">No User Accounts</td></tr>
 	<tr *ngFor="let item of users">
 		<th>{{item.id}}</th>
-		<th>{{item.name}}</th>
+		<th>{{item.userName}}</th>
 		<th>{{item.email}}</th>
 	</tr>
 </table>
