@@ -7,13 +7,15 @@ import { routing } from "./app.routing";
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
-import { UsersDataSource } from './_services/users.datasource'
+import { AuthService } from './_services/auth.service';
+import { RegisterComponent } from './users/register.component'
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		UsersComponent,
-		HomeComponent
+		HomeComponent,
+		RegisterComponent
 	],
 	imports: [
 		BrowserModule,
@@ -22,7 +24,7 @@ import { UsersDataSource } from './_services/users.datasource'
 		HttpModule
 	],
 	providers: [
-		UsersDataSource
+		AuthService
 	],
 	bootstrap: [AppComponent]
 })

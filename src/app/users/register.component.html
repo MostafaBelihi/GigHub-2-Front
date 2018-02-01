@@ -1,0 +1,8 @@
+<form>
+	<input type="text" placeholder="Username" [(ngModel)]="item.user.userName" name="userName" class="form-control">
+	<input type="password" placeholder="Password" [(ngModel)]="item.password" name="password" class="form-control">
+	<input type="text" placeholder="Email" [(ngModel)]="item.user.email" name="email" class="form-control">
+	<input type="text" placeholder="First Name" [(ngModel)]="item.user.firstName" name="firstName" class="form-control">
+	<input type="text" placeholder="Last Name" [(ngModel)]="item.user.lastName" name="lastName" class="form-control">
+	<button (click)="post()">Register</button>
+</form>

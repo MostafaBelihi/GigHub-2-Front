@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UsersDataSource } from '../_services/users.datasource'
+import { AuthService } from '../_services/auth.service'
 import { AppUser } from '../_models/appUser.model'
 
 @Component({
@@ -11,7 +11,7 @@ export class UsersComponent implements OnInit {
 	private users: AppUser[];
 	private isEmpty: boolean = true;
 
-	constructor(private usersDataSource: UsersDataSource) {
+	constructor(private usersDataSource: AuthService) {
 		this.users = [];
 
 		// Getting list of users
