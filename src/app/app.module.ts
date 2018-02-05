@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
-import { RegisterComponent } from './users/register.component'
+import { RegisterComponent } from './users/register.component';
+import { NavComponent } from './nav/nav.component'
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		UsersComponent,
 		HomeComponent,
-		RegisterComponent
+		RegisterComponent,
+		NavComponent
 	],
 	imports: [
 		BrowserModule,
@@ -26,6 +28,6 @@ import { RegisterComponent } from './users/register.component'
 	providers: [
 		AuthService
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent, NavComponent]
 })
 export class AppModule { }
