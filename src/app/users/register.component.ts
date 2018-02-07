@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
 	/* Properties */
 	item: RegisterModel;
 
-	constructor(private authService: AuthService) {
+	constructor(private auth: AuthService) {
 		this.item = new RegisterModel();
 		this.item.user = new AppUser();
 	}
@@ -22,9 +22,7 @@ export class RegisterComponent implements OnInit {
 
 	post(){
 		console.log(this.item);
-		this.authService.register(this.item).subscribe(response => {
-			console.log(response);
-		})
+		this.auth.register(this.item);
 	}
 
 }
