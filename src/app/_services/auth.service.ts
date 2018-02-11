@@ -53,4 +53,10 @@ export class AuthService {
 				}
 			});
 	}
+
+	// + Clear LocalStorage values to implement logout
+    logout() {
+        localStorage.removeItem(this.NameKey);
+        localStorage.removeItem(this.TokenKey);
+    }
 }

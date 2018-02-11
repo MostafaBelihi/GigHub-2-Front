@@ -6,5 +6,6 @@
 	|
 	<a routerLink="/users">Users</a>
 	|
-	<a routerLink="/register">Register</a>
+	<a *ngIf="!auth.isAuthenticated" routerLink="/register">Register</a>
+	<button *ngIf="auth.isAuthenticated" (click)="auth.logout()">Logout</button>
 </div>
