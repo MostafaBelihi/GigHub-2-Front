@@ -1,11 +1,18 @@
 <div>
-	<span *ngIf="auth.isAuthenticated">
-		Welecome <strong>{{auth.name}}</strong>!...
-	</span>
 	<a routerLink="/">Home</a>
 	|
-	<a routerLink="/users">Users</a>
-	|
-	<a *ngIf="!auth.isAuthenticated" routerLink="/register">Register</a>
-	<button *ngIf="auth.isAuthenticated" (click)="auth.logout()">Logout</button>
+	<span *ngIf="auth.isAuthenticated">
+		<a routerLink="/users">Users</a>
+		|
+		<a href="#" (click)="auth.logout()">Logout</a>
+	</span>
+	<span *ngIf="!auth.isAuthenticated">
+		<a routerLink="/login">Login</a>
+		|
+		<a routerLink="/register">Register</a>
+	</span>
+	<span *ngIf="auth.isAuthenticated">
+		|
+		Welecome <strong>{{auth.name}}</strong>!...
+	</span>
 </div>

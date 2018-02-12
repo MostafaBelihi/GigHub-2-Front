@@ -1,0 +1,12 @@
+<form style="width:40%">
+	<div class="alert alert-danger" *ngIf="!success">Login failure! Try again!</div>
+	<div class="form-group">
+		<label>Username</label>
+		<input type="text" placeholder="Username" [(ngModel)]="loginData.userName" name="username" class="form-control">
+	</div>
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="password" class="form-control">
+	</div>
+	<button (click)="post()">Login</button>
+</form>

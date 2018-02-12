@@ -9,7 +9,6 @@ import { AppUser } from "../_models/appUser.model";
 	styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-	/* Properties */
 	item: RegisterModel;
 
 	constructor(private auth: AuthService) {
@@ -22,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
 	post(){
 		console.log(this.item);
-		this.auth.register(this.item);
+		if(!this.auth.register(this.item))
+			console.log("Error!");
 	}
 
 }

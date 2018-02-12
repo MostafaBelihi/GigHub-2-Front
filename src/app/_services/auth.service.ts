@@ -28,7 +28,7 @@ export class AuthService {
 	}
 
 	constructor(private _http: Http, private router: Router) { }
-	
+
 	// Get users list
 	getUsers(): Observable<AppUser[]> {
 		return this._http.get(this.ServiceUrl + "/auth/getUsers").map(response => response.json());
@@ -36,27 +36,39 @@ export class AuthService {
 
 	// Register user to backend, store its data in browser after success
 	register(regsiter: RegisterModel) {
-		return this._http.post(this.ServiceUrl + "/auth/register", regsiter).map(response => <JwtPacket>response.json())
+		this._http.post(this.ServiceUrl + "/auth/register", regsiter).map(response => <JwtPacket>response.json())
 			.subscribe(response => {
-				// + Storing returned token to browser LocalStorage to be used in authentication checks, redirect after success
-				if (response.isError)
-					console.log("Error!");
-				else {
-					// Token is valid?
-					if (!response.token)
-						return;
-					
-					// Store token, redirect
-					localStorage.setItem(this.TokenKey, response.token);
-					localStorage.setItem(this.NameKey, response.firstName);
-					this.router.navigate(['/']);
-				}
+				this.authenticate(response);
+			});
+	}
+
+	login(loginData) {
+		this._http.post(this.ServiceUrl + "/auth/login", loginData).map(response => <JwtPacket>response.json())
+			.subscribe(response => {
+				this.authenticate(response);
 			});
 	}
 
 	// + Clear LocalStorage values to implement logout
-    logout() {
-        localStorage.removeItem(this.NameKey);
-        localStorage.removeItem(this.TokenKey);
-    }
+	logout() {
+		localStorage.removeItem(this.NameKey);
+		localStorage.removeItem(this.TokenKey);
+	}
+
+	authenticate(response) {
+		// + Storing returned token to browser LocalStorage to be used for authorization, redirect after success
+		if (response.isError)
+			return false;
+		else {
+			// Token is valid?
+			if (!response.token)
+				return false;
+
+			// Store token, redirect
+			localStorage.setItem(this.TokenKey, response.token);
+			localStorage.setItem(this.NameKey, response.firstName);
+			this.router.navigate(['/']);
+		}
+
+	}
 }
