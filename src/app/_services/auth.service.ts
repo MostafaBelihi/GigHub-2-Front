@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { Router } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
@@ -27,7 +26,7 @@ export class AuthService {
 		return !!localStorage.getItem(this.NameKey);
 	}
 
-	constructor(private _http: Http, private router: Router) { }
+	constructor(private _http: Http) { }
 
 	// Get users list
 	getUsers(): Observable<AppUser[]> {
@@ -39,14 +38,18 @@ export class AuthService {
 		this._http.post(this.ServiceUrl + "/auth/register", regsiter).map(response => <JwtPacket>response.json())
 			.subscribe(response => {
 				this.authenticate(response);
-			});
+				return true;
+			},
+			error => { return false; });
 	}
 
 	login(loginData) {
 		this._http.post(this.ServiceUrl + "/auth/login", loginData).map(response => <JwtPacket>response.json())
 			.subscribe(response => {
 				this.authenticate(response);
-			});
+				return true;
+			},
+			error => { return false; });
 	}
 
 	// + Clear LocalStorage values to implement logout
@@ -57,18 +60,13 @@ export class AuthService {
 
 	authenticate(response) {
 		// + Storing returned token to browser LocalStorage to be used for authorization, redirect after success
-		if (response.isError)
+		// Token is valid?
+		if (!response.token)
 			return false;
-		else {
-			// Token is valid?
-			if (!response.token)
-				return false;
 
-			// Store token, redirect
-			localStorage.setItem(this.TokenKey, response.token);
-			localStorage.setItem(this.NameKey, response.firstName);
-			this.router.navigate(['/']);
-		}
+		// Store token, redirect
+		localStorage.setItem(this.TokenKey, response.token);
+		localStorage.setItem(this.NameKey, response.firstName);
 
 	}
 }

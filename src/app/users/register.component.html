@@ -1,3 +1,4 @@
+<div class="alert alert-danger" *ngIf="!success">Registration failure! Try again!</div>
 <form>
 	<input type="text" placeholder="Username" [(ngModel)]="item.user.userName" name="userName" class="form-control">
 	<input type="password" placeholder="Password" [(ngModel)]="item.password" name="password" class="form-control">
